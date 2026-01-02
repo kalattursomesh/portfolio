@@ -1,0 +1,1 @@
+Built a PDF-based AI Chatbot using LangChain and OpenAI. Uses FAISS for vector storage and RAG for accurate document retrieval
