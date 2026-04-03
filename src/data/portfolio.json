@@ -1,0 +1,180 @@
+{
+  "personal": {
+    "name": "Kalattur Somesh",
+    "title": "AI & ML Specialist | Software Engineer | Full-Stack Developer",
+    "email": "kalathursomesh@gmail.com",
+    "phone": "+91 70328 34889",
+    "location": "Bangalore, Karnataka",
+    "bio": "A passionate Artificial Intelligence and Machine Learning undergraduate at Nitte Meenakshi Institute of Technology. I specialize in building intelligent systems, deep learning models, and high-performance web applications. \n\nMy focus is on transforming complex data into cognitive solutions that solve real-world problems through innovative engineering and elegant design.",
+    "avatar": "/images/avatar.jpg",
+    "resume": "/resume.pdf",
+    "socialLinks": [
+      {
+        "platform": "github",
+        "url": "https://github.com/kalattursomesh",
+        "icon": "Github"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/in/kalattursomesh",
+        "icon": "Linkedin"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "aws-cloud-infra",
+      "title": "AWS Cloud Infrastructure Project",
+      "description": "Secure and scalable AWS infrastructure provisioning with EC2, S3, and IAM.",
+      "longDescription": "A comprehensive cloud infrastructure project focused on security and scalability. Implementations include provisioning EC2 instances for hosting, managing S3 buckets for object storage with versioning, and configuring IAM users/roles using the principle of least privilege.",
+      "technologies": [
+        { "name": "AWS EC2", "category": "cloud", "icon": "aws", "color": "#FF9900" },
+        { "name": "AWS S3", "category": "cloud", "icon": "aws", "color": "#FF9900" },
+        { "name": "AWS IAM", "category": "cloud", "icon": "aws", "color": "#FF9900" }
+      ],
+      "category": "cloud-computing",
+      "images": [
+        { "src": "/images/projects/aws-infra.png", "alt": "AWS Infrastructure Diagram", "width": 1200, "height": 800 }
+      ],
+      "githubUrl": "https://github.com/kalattursomesh",
+      "featured": true,
+      "completedDate": "2024-05-01T00:00:00.000Z",
+      "highlights": [
+        "Configured EC2 Security Groups and VPCs",
+        "Implemented S3 Bucket Policies and Lifecycle Rules",
+        "Managed multi-user IAM roles and permissions"
+      ]
+    },
+    {
+      "id": "food-delivery-system",
+      "title": "Food Delivery System",
+      "description": "Full-stack J2EE application for managing food orders and delivery logistics.",
+      "longDescription": "Developed a robust full-stack food delivery application using Advanced Java (J2EE). The project involved detailed HLD/LLD documentation and UML-based system design. Implemented JDBC for database connectivity to handle users, orders, and restaurants efficiently.",
+      "technologies": [
+        { "name": "Java (J2EE)", "category": "backend", "icon": "java", "color": "#007396" },
+        { "name": "JDBC", "category": "database", "icon": "mysql", "color": "#4479A1" },
+        { "name": "SQL", "category": "database", "icon": "mysql", "color": "#F29111" }
+      ],
+      "category": "web-development",
+      "images": [
+        { "src": "/images/projects/food-delivery.png", "alt": "Food Delivery App", "width": 1200, "height": 800 }
+      ],
+      "githubUrl": "https://github.com/kalattursomesh",
+      "featured": true,
+      "completedDate": "2024-03-01T00:00:00.000Z",
+      "highlights": [
+        "UML-based System Design (Class, Sequence, Activity diagrams)",
+        "Relational database schema design",
+        "End-to-end order tracking logic"
+      ]
+    },
+    {
+      "id": "brain-tumor-segmentation",
+      "title": "Brain Tumor Segmentation",
+      "description": "Deep Learning pipeline for MRI brain tumor segmentation using CNNs.",
+      "longDescription": "A sophisticated AI project centered on medical imaging. Built a CNN-based deep learning pipeline for MRI-based brain tumor segmentation. Includes data preprocessing, normalization, and feature engineering to enhance segmentation accuracy.",
+      "technologies": [
+        { "name": "Python", "category": "languages", "icon": "python", "color": "#3776AB" },
+        { "name": "CNN", "category": "ai-ml", "icon": "pytorch", "color": "#EE4C2C" },
+        { "name": "OpenCV", "category": "ai-ml", "icon": "opencv", "color": "#5C3EE8" }
+      ],
+      "category": "ai-ml",
+      "images": [
+        { "src": "/images/projects/brain-tumor.png", "alt": "Brain Tumor Segmentation Visualization", "width": 1200, "height": 800 }
+      ],
+      "githubUrl": "https://github.com/kalattursomesh",
+      "featured": true,
+      "completedDate": "2024-01-01T00:00:00.000Z",
+      "highlights": [
+        "MRI Image Preprocessing and Normalization",
+        "Performance evaluation using IoU and Dice scores",
+        "Feature engineering for segmentation"
+      ]
+    },
+    {
+      "id": "billing-system-pos",
+      "title": "Billing System - POS",
+      "description": "Browser-based Point of Sale system with dynamic invoicing and local persistence.",
+      "longDescription": "A practical web application for retail management. Built with HTML, CSS, and JavaScript, featuring dynamic invoice generation, product catalog management, and LocalStorage for seamless client-side data persistence.",
+      "technologies": [
+        { "name": "JavaScript", "category": "frontend", "icon": "javascript", "color": "#F7DF1E" },
+        { "name": "HTML5", "category": "frontend", "icon": "html5", "color": "#E34F26" },
+        { "name": "CSS3", "category": "frontend", "icon": "css3", "color": "#1572B6" }
+      ],
+      "category": "web-development",
+      "images": [
+        { "src": "/images/projects/pos-system.png", "alt": "POS System UI", "width": 1200, "height": 800 }
+      ],
+      "githubUrl": "https://github.com/kalattursomesh",
+      "liveUrl": "https://orbittechnologies.vercel.app/",
+      "directLink": true,
+      "featured": false,
+      "completedDate": "2023-11-01T00:00:00.000Z",
+      "highlights": [
+        "In-browser data persistence using LocalStorage",
+        "PDF Invoice Generation",
+        "Responsive POS Dashboard"
+      ]
+    }
+  ],
+  "skills": [
+    { "name": "Python", "category": "Languages", "proficiency": 90 },
+    { "name": "Java", "category": "Languages", "proficiency": 85 },
+    { "name": "C / C++", "category": "Languages", "proficiency": 80 },
+    { "name": "JavaScript", "category": "Languages", "proficiency": 75 },
+    { "name": "AWS (EC2, S3, IAM)", "category": "Cloud", "proficiency": 85 },
+    { "name": "PyTorch / CNN", "category": "AI/ML", "proficiency": 75 },
+    { "name": "NumPy / Pandas", "category": "AI/ML", "proficiency": 80 },
+    { "name": "Computer Vision", "category": "AI/ML", "proficiency": 70 },
+    { "name": "DSA", "category": "CS Fundamentals", "proficiency": 85 },
+    { "name": "Operating Systems", "category": "CS Fundamentals", "proficiency": 75 },
+    { "name": "Web Dev (HTML/CSS)", "category": "Frontend", "proficiency": 90 },
+    { "name": "Git / GitHub", "category": "Tools", "proficiency": 85 },
+    { "name": "Linux", "category": "Tools", "proficiency": 80 }
+  ],
+  "experience": [
+    {
+      "id": "marketing-intern",
+      "company": "Corizo Edutech Pvt. Ltd.",
+      "position": "Marketing Intern / Campus Ambassador",
+      "startDate": "2025-11-01",
+      "endDate": "2026-03-30",
+      "location": "Bengaluru (Remote/Campus)",
+      "description": "Driving technical awareness and coordinating student engagement across the campus network.",
+      "responsibilities": [
+        "Represented the organization as a campus ambassador and coordinated student outreach activities.",
+        "Assisted in onboarding students for technical training programs and facilitated engagement initiatives.",
+        "Organized awareness sessions for cloud and AI/ML certification programs."
+      ],
+      "technologies": ["Marketing", "Outreach", "Leadership", "Event Management"],
+      "employmentType": "internship"
+    }
+  ],
+  "education": [
+    {
+      "id": "be-ai-ml",
+      "institution": "Nitte Meenakshi Institute of Technology",
+      "degree": "Bachelor of Engineering (B.E)",
+      "field": "Artificial Intelligence and Machine Learning",
+      "startDate": "2023-01-01",
+      "endDate": "2027-01-01",
+      "current": true,
+      "location": "Bengaluru",
+      "relevantCourses": [
+        "Data Structures & Algorithms",
+        "Object Oriented Programming",
+        "Operating Systems",
+        "Networking Basics",
+        "Computer Organization",
+        "Automata Theory"
+      ]
+    }
+  ],
+  "certifications": [
+    { "name": "AWS Certified Cloud Practitioner", "issuer": "Amazon Web Services", "year": "2024" },
+    { "name": "Data Structures and Algorithms using Python - Part 1", "issuer": "NPTEL/Coursera", "year": "2023" },
+    { "name": "Java Class Library", "issuer": "Coursera", "year": "2023" },
+    { "name": "Java Programming: Solving Problems with Software", "issuer": "Coursera", "year": "2023" }
+  ],
+  "languages": ["English", "Telugu", "Kannada", "Hindi"]
+}

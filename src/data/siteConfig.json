@@ -1,0 +1,76 @@
+{
+  "site": {
+    "name": "Kalattur Somesh Portfolio",
+    "title": "Kalattur Somesh - AI & ML undergraduate | AWS Certified",
+    "description": "Portfolio of Kalattur Somesh, an AI & ML undergraduate with a strong foundation in cloud infrastructure and intelligent systems.",
+    "url": "https://kalattursomesh.dev",
+    "author": "Kalattur Somesh",
+    "keywords": [
+      "AI/ML",
+      "Cloud Architect",
+      "AWS Certified Cloud Practitioner",
+      "Full Stack Developer",
+      "NMIT Bengaluru",
+      "Python Developer",
+      "Java Developer"
+    ],
+    "language": "en",
+    "locale": "en_US",
+    "twitterHandle": "kalattursomesh",
+    "ogImage": "/images/og-image.jpg",
+    "favicon": "/favicon.ico"
+  },
+  "profile": {
+    "name": "KALATTUR SOMESH",
+    "role": "AI & ML Specialist | Cloud Enthusiast",
+    "major": "Artificial Intelligence & Machine Learning - B.E",
+    "minor": "Cloud Computing (AWS Certified)",
+    "avatar": "/images/avatar.jpg",
+    "bio": "I am an AI & ML undergraduate student at Nitte Meenakshi Institute of Technology. I am an AWS Certified Cloud Practitioner with a passion for cloud infrastructure and intelligent systems."
+  },
+  "theme": {
+    "colorScheme": "dark",
+    "primaryColor": "#06B6D4",
+    "secondaryColor": "#9CA3AF",
+    "accentColor": "#A78BFA",
+    "backgroundColor": "#0B1220",
+    "surfaceColor": "#0F1724",
+    "textColor": "#E6EEF3",
+    "mutedTextColor": "#9AA6B2",
+    "fontFamily": {
+      "heading": "Outfit, system-ui, sans-serif",
+      "body": "Inter, system-ui, sans-serif",
+      "mono": "JetBrains Mono, Consolas, monospace"
+    },
+    "borderRadius": "0.75rem",
+    "shadows": true,
+    "glassmorphism": true
+  },
+  "sections": [
+    { "id": "hero", "enabled": true, "order": 1, "title": "Innovating with AI & Cloud", "subtitle": "AI & ML Student & AWS Certified Cloud Practitioner" },
+    { "id": "about", "enabled": true, "order": 2, "title": "About Me", "subtitle": "A short story of my journey" },
+    { "id": "skills", "enabled": true, "order": 3, "title": "Technical Expertise", "subtitle": "Core competencies in AI, Cloud, and Web" },
+    { "id": "projects", "enabled": true, "order": 4, "title": "Portfolio Projects", "subtitle": "A collection of my recent work" },
+    { "id": "experience", "enabled": true, "order": 5, "title": "Experience & Outreach", "subtitle": "My professional and community contributions" },
+    { "id": "contact", "enabled": true, "order": 6, "title": "Connect with Me", "subtitle": "Let's collaborate on something great" }
+  ],
+  "navigation": {
+    "logo": "KS",
+    "showLogo": true,
+    "sticky": true,
+    "hideOnScroll": false,
+    "items": [
+      { "label": "Home", "href": "#hero", "order": 1 },
+      { "label": "About", "href": "#about", "order": 2 },
+      { "label": "Skills", "href": "#skills", "order": 3 },
+      { "label": "Projects", "href": "#projects", "order": 4 },
+      { "label": "Experience", "href": "#experience", "order": 5 },
+      { "label": "Contact", "href": "#contact", "order": 6 }
+    ]
+  },
+  "footer": {
+    "showSocialLinks": true,
+    "showCopyright": true,
+    "copyrightText": "© 2024 Kalattur Somesh. All rights reserved."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "id": "all",
+      "name": "All Projects",
+      "color": "#6B7280",
+      "icon": "grid"
+    },
+    {
+      "id": "ai-ml",
+      "name": "AI & Machine Learning",
+      "color": "#8B5CF6",
+      "icon": "brain"
+    },
+    {
+      "id": "cloud-computing",
+      "name": "Cloud Architecture",
+      "color": "#FF9900",
+      "icon": "cloud"
+    },
+    {
+      "id": "web-development",
+      "name": "Web Systems",
+      "color": "#3B82F6",
+      "icon": "globe"
+    },
+    {
+      "id": "cs-fundamentals",
+      "name": "CS Implementation",
+      "color": "#10B981",
+      "icon": "code"
+    }
+  ]
+}
