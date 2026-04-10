@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://kalattursomesh.netlify.app/sitemap.xml
