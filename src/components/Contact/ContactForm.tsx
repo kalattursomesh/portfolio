@@ -2,16 +2,14 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, AlertCircle, Mail, MapPin, Terminal } from 'lucide-react';
-import { ContactFormData, ContactFormResponse } from '@/types';
+import { Send, CheckCircle2, AlertCircle, Mail, MapPin, Terminal, Phone, ExternalLink } from 'lucide-react';
 import AnimatedSection from '@/components/Animation/AnimatedSection';
 
-interface ContactFormProps {
-  onSubmit: (data: ContactFormData) => Promise<ContactFormResponse>;
-}
+const CONTACT_EMAIL = 'kalathursomesh@gmail.com';
+const CONTACT_PHONE = '+91 70328 34889';
 
-export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<ContactFormData>({
+export const ContactForm: React.FC = () => {
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
@@ -21,9 +19,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateField = (name: string, value: any): string => {
     switch (name) {
@@ -61,13 +59,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
+    // Reset status on new input
+    if (submitStatus !== 'idle') setSubmitStatus('idle');
   };
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
     Object.keys(formData).forEach(key => {
       if (key !== 'honeypot') {
-        const value = formData[key as keyof ContactFormData];
+        const value = formData[key as keyof typeof formData];
         const error = validateField(key, value);
         if (error) newErrors[key] = error;
       }
@@ -85,32 +85,39 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
     setSubmitStatus('idle');
 
     try {
-      const response = await onSubmit(formData);
-      if (response.success) {
+      // Free Web3Forms integration - Sends emails silently in the background
+      // Note: Replace the access_key with your own key from https://web3forms.com/ (It's free)
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "4bd2811e-b70d-4849-a370-df070470b515",
+          name: formData.name,
+          email: formData.email,
+          subject: `[Portfolio Query] ${formData.subject}`,
+          message: formData.message,
+          from_name: "Portfolio Notification",
+        }),
+      });
+
+      const resData = await res.json();
+
+      if (res.status === 200) {
         setSubmitStatus('success');
-        setSubmitMessage(response.message);
+        setSubmitMessage("Message successfully sent! I'll get back to you soon.");
         setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: '',
-          honeypot: '',
-          consent: false
+          name: '', email: '', subject: '', message: '', honeypot: '', consent: false
         });
       } else {
         setSubmitStatus('error');
-        setSubmitMessage(response.message);
-        if (response.errors) {
-          const errorMap: Record<string, string> = {};
-          response.errors.forEach((error) => {
-            errorMap[error.field] = error.message;
-          });
-          setErrors(errorMap);
-        }
+        setSubmitMessage(resData.message || "Failed to send message. Please try again.");
       }
-    } catch (error) {
+    } catch (err) {
       setSubmitStatus('error');
-      setSubmitMessage('Something went wrong. Please try again.');
+      setSubmitMessage("Network error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -118,9 +125,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
   const inputClasses = `
     w-full px-4 py-3 rounded-xl
-    bg-white/3 border border-white/10
-    focus:border-[#00ff88]/40 focus:bg-[#00ff88]/3 focus:ring-0
-    text-white placeholder-white/15 outline-none
+    bg-[#050510]/50 border border-white/10
+    focus:border-[#00ff88]/50 focus:bg-[#00ff88]/5 focus:ring-0
+    text-[#00ff88] placeholder-white/40 outline-none
     transition-all duration-300 disabled:opacity-50
     font-mono text-sm
   `;
@@ -136,7 +143,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           </div>
           <h2 className="section-header mb-4">Get in touch.</h2>
           <p className="text-lg text-white/40 font-medium max-w-xl mx-auto">
-            Have a project in mind or want to discuss an opportunity? Let&apos;s connect.
+            Have a project in mind, queries, or want to discuss an opportunity? Send me an email and I&apos;ll get back to you.
           </p>
         </AnimatedSection>
 
@@ -155,7 +162,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
               </div>
 
               <div className="p-6 space-y-6 font-mono text-sm">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="text-[10px] text-[#00ff88]/40 uppercase tracking-widest">// endpoints</div>
 
                   <div className="flex items-center gap-4">
@@ -164,8 +171,20 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
                     </div>
                     <div>
                       <div className="text-[10px] text-white/20 uppercase tracking-wider">EMAIL</div>
-                      <a href="mailto:kalathursomesh@gmail.com" className="text-white/70 hover:text-[#00ff88] transition-colors text-xs">
-                        kalathursomesh@gmail.com
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="text-white/70 hover:text-[#00ff88] transition-colors text-xs">
+                        {CONTACT_EMAIL}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'rgba(168, 85, 247, 0.1)', border: '1px solid rgba(168, 85, 247, 0.2)' }}>
+                      <Phone className="w-4 h-4 text-[#a855f7]" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-white/20 uppercase tracking-wider">PHONE</div>
+                      <a href={`tel:${CONTACT_PHONE.replace(/\s/g, '')}`} className="text-white/70 hover:text-[#a855f7] transition-colors text-xs">
+                        {CONTACT_PHONE}
                       </a>
                     </div>
                   </div>
@@ -183,16 +202,24 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
               </div>
             </div>
 
-            {/* Response time */}
+            {/* Response time + direct email CTA */}
             <div className="os-window">
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Terminal className="w-4 h-4 text-[#00ff88]" />
                   <span className="font-mono text-xs text-[#00ff88]">response_time</span>
                 </div>
-                <p className="text-sm text-white/40 leading-relaxed">
-                  I typically respond within <span className="text-[#00ff88] font-bold">24 hours</span>. Whether it&apos;s a job opportunity or a collaborative project, I&apos;m always open to connecting.
+                <p className="text-sm text-white/40 leading-relaxed mb-5">
+                  I typically respond within <span className="text-[#00ff88] font-bold">24 hours</span>. Whether it&apos;s a job opportunity, queries, or a collaborative project, I&apos;m always open to connecting.
                 </p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('[Portfolio] Query')}`}
+                  className="btn-matrix w-full py-3 text-sm justify-center group"
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email me directly
+                  <ExternalLink className="w-3 h-3 ml-2 opacity-50 group-hover:opacity-100 transition-opacity" />
+                </a>
               </div>
             </div>
           </AnimatedSection>
@@ -265,7 +292,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
                     onChange={handleInputChange}
                     disabled={isSubmitting}
                     className={`${inputClasses} ${errors.message ? '!border-[#ff3366]/50' : ''} resize-none`}
-                    placeholder="Write your message here..."
+                    placeholder="Write your message or query here..."
                   />
                   {errors.message && <p className="text-xs text-[#ff3366] font-mono ml-1">{errors.message}</p>}
                 </div>

@@ -99,17 +99,17 @@
     "seo"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "your@email.com",
-    "url": "https://yourportfolio.com"
+    "name": "Kalattur Somesh",
+    "email": "kalathursomesh@gmail.com",
+    "url": "https://github.com/kalattursomesh"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/portfolio.git"
+    "url": "https://github.com/kalattursomesh/portfolio.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/portfolio/issues"
+    "url": "https://github.com/kalattursomesh/portfolio/issues"
   },
-  "homepage": "https://yourportfolio.com"
+  "homepage": "https://github.com/kalattursomesh"
 }

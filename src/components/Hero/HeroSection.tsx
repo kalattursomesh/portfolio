@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Download, Terminal, ChevronRight, Activity, Cpu, Globe, Shield } from 'lucide-react';
 import Image from 'next/image';
+import Typewriter from '@/components/Animation/Typewriter';
 
 interface HeroSectionProps {
   profile: any;
@@ -151,9 +152,20 @@ export function HeroSection({ profile }: HeroSectionProps) {
                     </h1>
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl text-white/40 max-w-xl mb-10 leading-relaxed font-medium mx-auto lg:mx-0">
-                      AI/ML engineer crafting deep learning pipelines, cloud infrastructure, and high-performance web applications.
-                    </p>
+                    <div className="text-lg md:text-xl text-white/40 max-w-xl mb-10 leading-relaxed font-medium mx-auto lg:mx-0 min-h-[60px] md:min-h-[80px]">
+                      <span className="text-[#00ff88]/80 font-mono text-sm mr-2 align-middle">&gt;</span>
+                      <Typewriter 
+                        words={[
+                          "AI/ML engineer crafting deep learning pipelines.",
+                          "AWS Certified architecting scalable cloud infrastructure.",
+                          "Full-Stack developer building high-performance web applications.",
+                          "Transforming complex data into cognitive solutions."
+                        ]} 
+                        typingSpeed={40}
+                        deletingSpeed={20}
+                        pauseTime={3000}
+                      />
+                    </div>
 
                     {/* Action buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
