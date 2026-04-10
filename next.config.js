@@ -19,10 +19,11 @@ const nextConfig = {
   images: {
     formats: ['image/webp', 'image/avif'],
     dangerouslyAllowSVG: true,
+    unoptimized: true,
   },
 
-  // Output configuration
-  output: 'standalone',
+  // Output configuration for Netlify/GitHub Pages
+  output: 'export',
 
   // Disable x-powered-by header
   poweredByHeader: false,
