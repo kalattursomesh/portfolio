@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   title: 'Kalattur Somesh — AI/ML Engineer & System Architect',
   description: 'Portfolio OS of Kalattur Somesh. AI/ML specialist, full-stack developer, and AWS-certified cloud engineer. Explore my terminal.',
   keywords: ['AI/ML Engineer', 'Portfolio', 'Full Stack Developer', 'AWS Certified', 'Deep Learning', 'Python'],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
