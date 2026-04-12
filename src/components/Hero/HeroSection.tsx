@@ -67,10 +67,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
       style={{ background: 'linear-gradient(180deg, #050510 0%, #080820 50%, #050510 100%)' }}
     >
       {/* Background effects */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#00ff88]/5 blur-[200px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#00d4ff]/5 blur-[200px] rounded-full" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#a855f7]/3 blur-[250px] rounded-full" />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transform-gpu translate-z-0">
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#00ff88]/5 blur-[100px] rounded-full" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#00d4ff]/5 blur-[100px] rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#a855f7]/3 blur-[120px] rounded-full" />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
