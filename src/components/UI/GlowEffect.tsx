@@ -3,9 +3,22 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
+// Hook to detect mobile devices
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
+
 export const GlowEffect: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = useIsMobile();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -16,8 +29,11 @@ export const GlowEffect: React.FC = () => {
   const shadowX = useSpring(mouseX, { damping: 60, stiffness: 100 });
   const shadowY = useSpring(mouseY, { damping: 60, stiffness: 100 });
 
-  // Matrix rain effect
+  // Matrix rain effect — DESKTOP ONLY
   useEffect(() => {
+    // Skip the expensive canvas animation entirely on mobile
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -63,9 +79,12 @@ export const GlowEffect: React.FC = () => {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animFrame);
     };
-  }, []);
+  }, [isMobile]);
 
+  // Mouse tracking — DESKTOP ONLY
   useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -84,8 +103,28 @@ export const GlowEffect: React.FC = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY, isVisible, isMobile]);
 
+  // Mobile: render a lightweight static version
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden select-none">
+        {/* Subtle static grid — no animation cost */}
+        <div className="absolute inset-0 grid-bg opacity-20" />
+        {/* Simple ambient glow — no blur, just gradient */}
+        <div
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 255, 136, 0.06) 0%, transparent 70%)',
+          }}
+        />
+        {/* Noise overlay — very cheap */}
+        <div className="absolute inset-0 bg-noise opacity-[0.02] pointer-events-none" />
+      </div>
+    );
+  }
+
+  // Desktop: full experience
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden select-none">
       {/* Matrix rain canvas */}

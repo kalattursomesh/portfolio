@@ -26,9 +26,9 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
 
   return (
     <section id="skills" className="py-28 relative overflow-hidden px-6" style={{ background: 'linear-gradient(180deg, #050510 0%, #060618 50%, #050510 100%)' }}>
-      {/* Ambient effects */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#00ff88]/3 blur-[200px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#a855f7]/3 blur-[200px] rounded-full pointer-events-none" />
+      {/* Ambient effects — reduced blur on mobile for performance */}
+      <div className="absolute top-1/4 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#00ff88]/3 blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#a855f7]/3 blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section heading */}

@@ -318,3 +318,32 @@
     border-image: linear-gradient(90deg, #a855f7, #00ff88, #00d4ff, #a855f7) 1;
   }
 }
+
+/* ========== Mobile Performance Optimizations ========== */
+@media (max-width: 767px) {
+  .os-window {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow:
+      0 0 0 1px rgba(0, 255, 136, 0.05),
+      0 4px 16px -8px rgba(0, 0, 0, 0.5);
+  }
+
+  .os-window:hover {
+    transform: none; /* Disable hover lift on mobile — saves composite layers */
+    box-shadow:
+      0 0 0 1px rgba(0, 255, 136, 0.1),
+      0 4px 16px -8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Reduce scanline overlay complexity */
+  .scanlines::after {
+    display: none;
+  }
+
+  /* Disable glitch animation on mobile */
+  .glitch-text::before,
+  .glitch-text::after {
+    animation: none;
+  }
+}

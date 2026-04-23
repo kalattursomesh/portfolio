@@ -35,7 +35,7 @@ export function ProjectShowcase({ projects, categories }: ProjectShowcaseProps) 
 
   return (
     <section id="projects" className="py-28 relative overflow-hidden px-6" style={{ background: 'linear-gradient(180deg, #050510 0%, #060618 50%, #050510 100%)' }}>
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#a855f7]/3 blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#a855f7]/3 blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
