@@ -34,8 +34,9 @@ export function ProjectShowcase({ projects, categories }: ProjectShowcaseProps) 
   }, [projects, selectedCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-28 relative overflow-hidden px-6" style={{ background: 'linear-gradient(180deg, #050510 0%, #060618 50%, #050510 100%)' }}>
-      <div className="absolute top-0 right-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#a855f7]/3 blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
+    <section id="projects" className="py-28 relative overflow-hidden px-6 aurora-section">
+      <div className="absolute top-0 right-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#8B5CF6]/[0.03] blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-1/3 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#00FFB2]/[0.03] blur-[80px] md:blur-[180px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
@@ -46,8 +47,8 @@ export function ProjectShowcase({ projects, categories }: ProjectShowcaseProps) 
             viewport={{ once: true }}
             className="flex-1"
           >
-            <div className="font-mono text-xs text-[#00ff88]/50 mb-3 flex items-center gap-2">
-              <span className="text-[#00ff88]">❯</span> find ~/projects -type d
+            <div className="font-mono text-xs text-[#00FFB2]/50 mb-3 flex items-center gap-2">
+              <span className="text-[#00FFB2]">❯</span> find ~/projects -type d
             </div>
             <h2 className="section-header mb-4">Projects.</h2>
             <p className="text-lg text-white/40 font-medium leading-relaxed max-w-lg">
@@ -63,13 +64,13 @@ export function ProjectShowcase({ projects, categories }: ProjectShowcaseProps) 
             className="w-full lg:w-80 group"
           >
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 w-4 h-4 group-focus-within:text-[#00ff88] transition-colors" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 w-4 h-4 group-focus-within:text-[#00FFB2] transition-colors" />
               <input
                 type="text"
                 placeholder="grep -r 'keyword'"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/3 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-[#00ff88]/40 focus:bg-[#00ff88]/3 transition-all font-mono text-sm"
+                className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-[#00FFB2]/40 focus:bg-[#00FFB2]/[0.03] transition-all font-mono text-sm"
               />
             </div>
           </motion.div>
@@ -119,9 +120,9 @@ export function ProjectShowcase({ projects, categories }: ProjectShowcaseProps) 
 const FilterBtn = ({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-2 rounded-lg font-mono text-xs transition-all duration-300 border ${
+    className={`px-4 py-2 rounded-xl font-mono text-xs transition-all duration-300 border ${
       active
-        ? 'bg-[#00ff88]/10 text-[#00ff88] border-[#00ff88]/30 shadow-[0_0_15px_rgba(0,255,136,0.1)]'
+        ? 'bg-[#00FFB2]/10 text-[#00FFB2] border-[#00FFB2]/30 shadow-[0_0_20px_rgba(0,255,178,0.08)]'
         : 'bg-transparent text-white/30 border-white/5 hover:border-white/15 hover:text-white/60'
     }`}
   >
@@ -137,10 +138,11 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
     exit={{ opacity: 0, scale: 0.95 }}
     transition={{ duration: 0.5 }}
     onClick={onClick}
-    className="group cursor-pointer os-window"
+    className="group cursor-pointer os-window-aurora"
+    style={{ background: 'rgba(12, 10, 40, 0.75)' }}
   >
     {/* Window title bar */}
-    <div className="os-titlebar">
+    <div className="os-titlebar relative z-10">
       <div className="os-titlebar-dots">
         <div className="os-titlebar-dot bg-[#ff5f57]" />
         <div className="os-titlebar-dot bg-[#febc2e]" />
@@ -158,23 +160,23 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
     </div>
 
     {/* Project image */}
-    <div className="relative aspect-[16/9] overflow-hidden">
+    <div className="relative aspect-[16/9] overflow-hidden z-10">
       <Image
         src={project.images[0]?.src || '/placeholder-project.jpg'}
         alt={project.title}
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-[#0a0a1a]/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-[#030014]/40 to-transparent" />
 
       {/* Category badge */}
       <div className="absolute top-3 left-3">
         <div
-          className="px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider"
+          className="px-3 py-1 rounded-lg font-mono text-[10px] font-bold uppercase tracking-wider"
           style={{
-            background: 'rgba(0, 255, 136, 0.1)',
-            color: '#00ff88',
-            border: '1px solid rgba(0, 255, 136, 0.2)',
+            background: 'rgba(0, 255, 178, 0.1)',
+            color: '#00FFB2',
+            border: '1px solid rgba(0, 255, 178, 0.2)',
           }}
         >
           {project.category}
@@ -183,8 +185,8 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
     </div>
 
     {/* Content */}
-    <div className="p-6">
-      <h3 className="text-xl font-bold text-white group-hover:text-[#00ff88] transition-colors tracking-tight mb-3">
+    <div className="p-6 relative z-10">
+      <h3 className="text-xl font-bold text-white group-hover:text-[#00FFB2] transition-colors tracking-tight mb-3">
         {project.title}
       </h3>
       <p className="text-sm text-white/40 leading-relaxed line-clamp-2 mb-5">
@@ -196,7 +198,7 @@ const ProjectCard = ({ project, onClick }: { project: Project; onClick: () => vo
         {project.technologies.slice(0, 4).map((tech: any) => (
           <span
             key={skillName(tech)}
-            className="px-2.5 py-1 rounded-md bg-white/5 border border-white/8 text-[11px] font-mono text-white/50 group-hover:text-white/70 group-hover:border-[#00ff88]/20 transition-all"
+            className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/8 text-[11px] font-mono text-white/50 group-hover:text-white/70 group-hover:border-[#00FFB2]/20 transition-all"
           >
             {skillName(tech)}
           </span>
@@ -219,7 +221,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     className="fixed inset-0 z-[1000] flex items-center justify-center p-4 md:p-8 overflow-y-auto"
-    style={{ background: 'rgba(5, 5, 16, 0.95)', backdropFilter: 'blur(20px)' }}
+    style={{ background: 'rgba(3, 0, 20, 0.95)', backdropFilter: 'blur(24px)' }}
     onClick={onClose}
   >
     <motion.div
@@ -237,11 +239,11 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#0a0a1a] via-[#0a0a1a]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#030014] via-[#030014]/30 to-transparent" />
 
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-3 rounded-xl bg-[#0a0a1a]/80 border border-white/10 text-white hover:text-[#00ff88] hover:border-[#00ff88]/30 transition-all z-10"
+          className="absolute top-4 right-4 p-3 rounded-xl bg-[#030014]/80 border border-white/10 text-white hover:text-[#00FFB2] hover:border-[#00FFB2]/30 transition-all z-10"
         >
           <X className="w-5 h-5" />
         </button>
@@ -263,8 +265,8 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
         <div className="p-6 md:p-8 flex-1 flex flex-col">
           <div className="flex-1">
             <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-[10px] font-bold uppercase tracking-wider mb-6"
-              style={{ background: 'rgba(0, 212, 255, 0.1)', color: '#00d4ff', border: '1px solid rgba(0, 212, 255, 0.2)' }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-mono text-[10px] font-bold uppercase tracking-wider mb-6"
+              style={{ background: 'rgba(0, 201, 255, 0.1)', color: '#00C9FF', border: '1px solid rgba(0, 201, 255, 0.2)' }}
             >
               <FolderOpen className="w-3 h-3" /> {project.category}
             </div>
@@ -278,12 +280,12 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
             </p>
 
             <div className="mb-8">
-              <div className="font-mono text-[10px] text-[#00ff88]/40 uppercase tracking-widest mb-3">// tech_stack</div>
+              <div className="font-mono text-[10px] text-[#00FFB2]/40 uppercase tracking-widest mb-3">// tech_stack</div>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech: any) => (
                   <span
                     key={skillName(tech)}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/8 text-xs font-mono text-white/60"
+                    className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/8 text-xs font-mono text-white/60"
                   >
                     {skillName(tech)}
                   </span>
@@ -299,7 +301,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                 Open Live <ExternalLink className="ml-2 w-4 h-4" />
               </a>
             ) : (
-              <div className="flex-1 px-6 py-3 rounded-lg border border-white/10 bg-white/3 text-white/20 font-mono text-sm text-center">
+              <div className="flex-1 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.03] text-white/20 font-mono text-sm text-center">
                 offline
               </div>
             )}
@@ -309,7 +311,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                 Source <Github className="ml-2 w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
             ) : (
-              <div className="flex-1 px-6 py-3 rounded-lg border border-white/10 bg-white/3 text-white/20 font-mono text-sm text-center">
+              <div className="flex-1 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.03] text-white/20 font-mono text-sm text-center">
                 private
               </div>
             )}

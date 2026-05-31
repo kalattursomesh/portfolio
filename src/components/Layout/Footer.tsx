@@ -30,20 +30,23 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="relative overflow-hidden z-50" style={{ background: 'linear-gradient(180deg, #050510 0%, #030308 100%)' }}>
+    <footer className="relative overflow-hidden z-50" style={{ background: 'linear-gradient(180deg, #030014 0%, #020008 100%)' }}>
+      {/* Aurora ambient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#8B5CF6]/[0.03] blur-[180px] rounded-full pointer-events-none" />
+
       {/* Main footer content */}
       <div className="border-t border-white/5">
         <div className="container mx-auto max-w-6xl px-6 py-20">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-12 mb-16">
             {/* CTA */}
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#00ff88]/8 border border-[#00ff88]/15 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#00FFB2]/[0.06] border border-[#00FFB2]/15 mb-6">
                 <span className="status-dot" />
-                <span className="font-mono text-xs text-[#00ff88]">currently accepting new projects</span>
+                <span className="font-mono text-xs text-[#00FFB2]">currently accepting new projects</span>
               </div>
               <h2 className="text-5xl md:text-7xl font-black text-white/90 tracking-tighter leading-[0.9] mb-4">
                 Let&apos;s build <br />
-                <span className="section-header !text-5xl md:!text-7xl">something.</span>
+                <span className="shimmer-text !text-5xl md:!text-7xl">something.</span>
               </h2>
               <p className="text-lg text-white/30 font-medium max-w-md">
                 Have an idea? Let&apos;s architect it together.
@@ -67,7 +70,7 @@ export function Footer() {
       </div>
 
       {/* OS Status Bar */}
-      <div className="border-t border-white/5 bg-[#030308]">
+      <div className="border-t border-white/5 bg-[#020008]">
         <div className="container mx-auto max-w-6xl px-6 py-3">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
             {/* Left status */}
@@ -77,7 +80,7 @@ export function Footer() {
                 <span>SOMESH_OS v2.0</span>
               </div>
               <div className="hidden sm:flex items-center gap-1.5">
-                <Wifi className="w-3 h-3 text-[#00ff88]" />
+                <Wifi className="w-3 h-3 text-[#00FFB2]" />
                 <span>connected</span>
               </div>
               <div className="hidden md:flex items-center gap-1.5">
@@ -107,9 +110,9 @@ const SocialIcon = ({ icon, href, label }: { icon: React.ReactNode; href: string
   <a
     href={href}
     target="_blank"
-    className="flex-1 sm:flex-none flex items-center justify-center gap-2 p-4 rounded-xl os-window hover:!border-[#00ff88]/30 transition-all group"
+    className="flex-1 sm:flex-none flex items-center justify-center gap-2 p-4 rounded-xl os-window hover:!border-[#00FFB2]/30 transition-all group"
   >
-    <span className="text-white/40 group-hover:text-[#00ff88] transition-colors">{icon}</span>
-    <span className="font-mono text-[10px] text-white/20 group-hover:text-[#00ff88]/60 transition-colors hidden sm:inline">{label}</span>
+    <span className="text-white/40 group-hover:text-[#00FFB2] transition-colors">{icon}</span>
+    <span className="font-mono text-[10px] text-white/20 group-hover:text-[#00FFB2]/60 transition-colors hidden sm:inline">{label}</span>
   </a>
 );

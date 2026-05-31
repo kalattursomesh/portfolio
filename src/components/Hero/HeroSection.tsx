@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Download, Terminal, ChevronRight, Activity, Cpu, Globe, Shield } from 'lucide-react';
+import { ArrowRight, Download, Terminal, Activity, Cpu, Globe, Shield } from 'lucide-react';
 import Image from 'next/image';
 import Typewriter from '@/components/Animation/Typewriter';
 
@@ -22,31 +22,62 @@ interface HeroSectionProps {
 }
 
 const bootLines = [
-  { text: 'SOMESH_OS v2.0.26 — INITIALIZING...', delay: 0, color: '#00ff88' },
-  { text: '[OK] Loading neural networks...', delay: 300, color: '#00d4ff' },
-  { text: '[OK] Compiling AI/ML modules...', delay: 600, color: '#00d4ff' },
-  { text: '[OK] Mounting cloud infrastructure (AWS)...', delay: 900, color: '#00d4ff' },
-  { text: '[OK] Starting full-stack runtime...', delay: 1200, color: '#00d4ff' },
-  { text: '[READY] All systems operational.', delay: 1500, color: '#00ff88' },
+  { text: 'SOMESH_OS v2.0.26 — INITIALIZING...', delay: 0, color: '#00FFB2' },
+  { text: '[OK] Loading neural networks...', delay: 250, color: '#00C9FF' },
+  { text: '[OK] Compiling AI/ML modules...', delay: 450, color: '#8B5CF6' },
+  { text: '[OK] Mounting cloud infrastructure (AWS)...', delay: 650, color: '#00C9FF' },
+  { text: '[OK] Starting full-stack runtime...', delay: 850, color: '#8B5CF6' },
+  { text: '[READY] All systems operational.', delay: 1050, color: '#00FFB2' },
 ];
 
 const stats = [
-  { icon: <Cpu className="w-4 h-4" />, label: 'FOCUS', value: 'AI & ML', color: '#00ff88' },
-  { icon: <Globe className="w-4 h-4" />, label: 'STACK', value: 'Full-Stack', color: '#00d4ff' },
-  { icon: <Shield className="w-4 h-4" />, label: 'CERT', value: 'AWS CCP', color: '#a855f7' },
-  { icon: <Activity className="w-4 h-4" />, label: 'STATUS', value: 'Available', color: '#00ff88' },
+  { icon: <Cpu className="w-4 h-4" />, label: 'FOCUS', value: 'AI & ML', color: '#00FFB2' },
+  { icon: <Globe className="w-4 h-4" />, label: 'STACK', value: 'Full-Stack', color: '#00C9FF' },
+  { icon: <Shield className="w-4 h-4" />, label: 'CERT', value: 'AWS CCP', color: '#8B5CF6' },
+  { icon: <Activity className="w-4 h-4" />, label: 'STATUS', value: 'Available', color: '#00FFB2' },
 ];
+
+// 3D Tilt Hook
+function useTilt(ref: React.RefObject<HTMLDivElement | null>) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -12, y: x * 12 });
+  }, [ref]);
+
+  const handleMouseLeave = useCallback(() => {
+    setTilt({ x: 0, y: 0 });
+  }, []);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.addEventListener('mousemove', handleMouseMove);
+    el.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      el.removeEventListener('mousemove', handleMouseMove);
+      el.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [ref, handleMouseMove, handleMouseLeave]);
+
+  return tilt;
+}
 
 export function HeroSection({ profile }: HeroSectionProps) {
   const [bootComplete, setBootComplete] = useState(false);
   const [visibleLines, setVisibleLines] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const isMobile = useIsMobile();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const tilt = useTilt(cardRef);
 
   useEffect(() => {
-    // Boot sequence animation — faster on mobile
     const timers: NodeJS.Timeout[] = [];
-    const speedMultiplier = isMobile ? 0.35 : 1; // 65% faster on mobile
+    const speedMultiplier = isMobile ? 0.3 : 1;
 
     bootLines.forEach((_, index) => {
       const timer = setTimeout(() => {
@@ -55,11 +86,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
       timers.push(timer);
     });
 
-    // After boot completes, show the main content
-    const bootDuration = isMobile ? 800 : 2200;
+    const bootDuration = isMobile ? 600 : 1500;
     const contentTimer = setTimeout(() => {
       setBootComplete(true);
-      setTimeout(() => setShowContent(true), isMobile ? 100 : 300);
+      setTimeout(() => setShowContent(true), isMobile ? 80 : 200);
     }, bootDuration);
     timers.push(contentTimer);
 
@@ -78,13 +108,14 @@ export function HeroSection({ profile }: HeroSectionProps) {
     <section
       id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 pt-20"
-      style={{ background: 'linear-gradient(180deg, #050510 0%, #080820 50%, #050510 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #030014 0%, #0A0520 40%, #060318 100%)' }}
     >
-      {/* Background effects */}
+      {/* Aurora ambient lights */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transform-gpu translate-z-0">
-        <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#00ff88]/5 blur-[50px] md:blur-[100px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#00d4ff]/5 blur-[50px] md:blur-[100px] rounded-full" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-[#a855f7]/3 blur-[60px] md:blur-[120px] rounded-full" />
+        <div className="absolute top-[10%] left-[15%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#00FFB2]/[0.04] blur-[80px] md:blur-[120px] rounded-full" />
+        <div className="absolute bottom-[20%] right-[10%] w-[250px] md:w-[450px] h-[250px] md:h-[450px] bg-[#8B5CF6]/[0.05] blur-[80px] md:blur-[120px] rounded-full" />
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[350px] md:w-[600px] h-[350px] md:h-[600px] bg-[#00C9FF]/[0.03] blur-[100px] md:blur-[150px] rounded-full" />
+        <div className="absolute bottom-[10%] left-[30%] w-[200px] md:w-[350px] h-[200px] md:h-[350px] bg-[#FF6B9D]/[0.03] blur-[80px] md:blur-[120px] rounded-full" />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
@@ -95,7 +126,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
               className="max-w-2xl mx-auto"
             >
               <div className="os-window">
@@ -115,7 +146,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                       key={i}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.2 }}
                       style={{ color: line.color }}
                     >
                       {line.text}
@@ -130,7 +161,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
           )}
         </AnimatePresence>
 
-        {/* Main Hero Content — Appears after boot */}
+        {/* Main Hero Content */}
         <AnimatePresence>
           {showContent && (
             <motion.div
@@ -146,10 +177,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1 }}
                   >
-                    {/* Terminal-style greeting */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#00ff88]/8 border border-[#00ff88]/20 mb-8">
+                    {/* Terminal greeting */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#00FFB2]/[0.06] border border-[#00FFB2]/20 mb-8">
                       <span className="status-dot" />
-                      <span className="font-mono text-sm text-[#00ff88]">
+                      <span className="font-mono text-sm text-[#00FFB2]">
                         system ready — all modules loaded
                       </span>
                     </div>
@@ -159,7 +190,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                       <span className="block text-white/90">I architect</span>
                       <span className="block text-white/40">intelligent</span>
                       <span className="block mt-2">
-                        <span className="section-header !text-5xl md:!text-7xl lg:!text-8xl">
+                        <span className="shimmer-text !text-5xl md:!text-7xl lg:!text-8xl font-black">
                           systems.
                         </span>
                       </span>
@@ -167,7 +198,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
 
                     {/* Description */}
                     <div className="text-lg md:text-xl text-white/40 max-w-xl mb-10 leading-relaxed font-medium mx-auto lg:mx-0 min-h-[60px] md:min-h-[80px]">
-                      <span className="text-[#00ff88]/80 font-mono text-sm mr-2 align-middle">&gt;</span>
+                      <span className="text-[#00FFB2]/80 font-mono text-sm mr-2 align-middle">&gt;</span>
                       <Typewriter 
                         words={[
                           "AI/ML engineer crafting deep learning pipelines.",
@@ -188,7 +219,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                         ./connect.sh
                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </button>
-                      <a href={profile.resume} className="btn-outline-terminal text-base group">
+                      <a href={profile.resume} className="btn-outline-terminal text-base group" download>
                         <Download className="mr-2 w-5 h-5 group-hover:-translate-y-1 transition-transform" />
                         download resume
                       </a>
@@ -196,15 +227,24 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   </motion.div>
                 </div>
 
-                {/* Right: System Dashboard */}
+                {/* Right: 3D Tilt Avatar Dashboard */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                   className="flex-shrink-0 order-1 lg:order-2 w-full max-w-sm"
+                  ref={cardRef}
+                  style={{
+                    perspective: '1000px',
+                  }}
                 >
-                  {/* Avatar OS Window */}
-                  <div className="os-window">
+                  <div
+                    className="os-window transition-transform duration-200 ease-out"
+                    style={{
+                      transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                      transformStyle: 'preserve-3d',
+                    }}
+                  >
                     <div className="os-titlebar">
                       <div className="os-titlebar-dots">
                         <div className="os-titlebar-dot bg-[#ff5f57]" />
@@ -216,7 +256,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                       </span>
                     </div>
 
-                    {/* Avatar */}
+                    {/* Avatar with aurora ring */}
                     <div className="relative aspect-square overflow-hidden">
                       <Image
                         src="/images/avatar.jpg"
@@ -226,15 +266,15 @@ export function HeroSection({ profile }: HeroSectionProps) {
                         className="object-cover"
                         priority
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent" />
 
                       {/* HUD overlay */}
-                      <div className="absolute top-3 left-3 font-mono text-[9px] text-[#00ff88]/60 space-y-1">
+                      <div className="absolute top-3 left-3 font-mono text-[9px] text-[#00FFB2]/60 space-y-1">
                         <div>ID: SOMESH_KS</div>
                         <div>LOC: 12.97°N 77.59°E</div>
                       </div>
                       <div className="absolute top-3 right-3">
-                        <div className="w-2 h-2 rounded-full bg-[#00ff88] shadow-[0_0_10px_rgba(0,255,136,0.8)] animate-pulse" />
+                        <div className="w-2 h-2 rounded-full bg-[#00FFB2] shadow-[0_0_10px_rgba(0,255,178,0.8)] animate-pulse" />
                       </div>
 
                       {/* Name badge */}
@@ -242,8 +282,12 @@ export function HeroSection({ profile }: HeroSectionProps) {
                         <div className="font-bold text-white text-lg tracking-tight leading-none">
                           {profile.name}
                         </div>
-                        <div className="font-mono text-xs text-[#00ff88]/80 mt-1">
-                          AI & ML Engineer
+                        <div className="font-mono text-xs mt-1">
+                          <span className="text-[#00FFB2]/80">AI & ML</span>
+                          <span className="text-white/20 mx-1.5">·</span>
+                          <span className="text-[#00C9FF]/80">Full-Stack</span>
+                          <span className="text-white/20 mx-1.5">·</span>
+                          <span className="text-[#8B5CF6]/80">Cloud</span>
                         </div>
                       </div>
                     </div>
@@ -251,7 +295,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                     {/* Stats grid */}
                     <div className="grid grid-cols-2 gap-px bg-white/5">
                       {stats.map((stat) => (
-                        <div key={stat.label} className="p-4 bg-[#0a0a1a]">
+                        <div key={stat.label} className="p-4 bg-[#030014]/80">
                           <div className="flex items-center gap-2 mb-1.5" style={{ color: stat.color }}>
                             {stat.icon}
                             <span className="font-mono text-[10px] uppercase tracking-widest opacity-60">
@@ -279,11 +323,11 @@ export function HeroSection({ profile }: HeroSectionProps) {
                 <div className="font-mono text-[10px] text-white/20 mb-3 tracking-widest">
                   SCROLL TO EXPLORE
                 </div>
-                <div className="w-8 h-14 rounded-full border border-white/10 flex items-start justify-center p-2 group-hover:border-[#00ff88]/30 transition-colors">
+                <div className="w-8 h-14 rounded-full border border-white/10 flex items-start justify-center p-2 group-hover:border-[#00FFB2]/30 transition-colors">
                   <motion.div
                     animate={{ y: [0, 14, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                    className="w-1.5 h-3 rounded-full bg-[#00ff88]/60"
+                    className="w-1.5 h-3 rounded-full bg-gradient-to-b from-[#00FFB2]/60 to-[#8B5CF6]/60"
                   />
                 </div>
               </motion.div>

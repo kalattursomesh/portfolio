@@ -4,34 +4,66 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { PersonalInfo } from '@/types';
 import { MapPin, GraduationCap, Code2, HeartPulse, Terminal, Wifi, HardDrive, Cpu } from 'lucide-react';
+import Image from 'next/image';
 
 interface AboutSectionProps {
   personal: PersonalInfo;
 }
 
 const systemModules = [
-  { name: 'neural_networks.py', status: 'active', cpu: '34%', color: '#00ff88' },
-  { name: 'cloud_infra.aws', status: 'active', cpu: '28%', color: '#00d4ff' },
-  { name: 'web_runtime.tsx', status: 'active', cpu: '22%', color: '#a855f7' },
-  { name: 'dsa_engine.cpp', status: 'idle', cpu: '8%', color: '#ffaa00' },
+  { name: 'neural_networks.py', status: 'active', cpu: '34%', color: '#00FFB2' },
+  { name: 'cloud_infra.aws', status: 'active', cpu: '28%', color: '#00C9FF' },
+  { name: 'web_runtime.tsx', status: 'active', cpu: '22%', color: '#8B5CF6' },
+  { name: 'dsa_engine.cpp', status: 'idle', cpu: '8%', color: '#FBBF24' },
 ];
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
   const { name, bio, location } = personal;
 
   return (
-    <section id="about" className="py-28 relative overflow-hidden px-6" style={{ background: 'linear-gradient(180deg, #050510 0%, #060618 50%, #050510 100%)' }}>
+    <section id="about" className="py-28 relative overflow-hidden px-6 aurora-section">
+      {/* Aurora ambient */}
+      <div className="absolute top-1/4 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#8B5CF6]/[0.04] blur-[100px] md:blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#00FFB2]/[0.03] blur-[80px] md:blur-[150px] rounded-full pointer-events-none" />
+
       <div className="container mx-auto relative z-10 max-w-6xl">
         <div className="grid lg:grid-cols-5 gap-12 items-start">
 
-          {/* Left Column: System Monitor Window */}
+          {/* Left Column: Photo + System Monitor */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-2"
+            className="lg:col-span-2 space-y-6"
           >
+            {/* Photo Card */}
+            <div className="os-window">
+              <div className="os-titlebar">
+                <div className="os-titlebar-dots">
+                  <div className="os-titlebar-dot bg-[#ff5f57]" />
+                  <div className="os-titlebar-dot bg-[#febc2e]" />
+                  <div className="os-titlebar-dot bg-[#28c840]" />
+                </div>
+                <span className="font-mono text-[10px] text-white/30 ml-3">identity.jpg</span>
+              </div>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-b-2xl avatar-aurora-ring">
+                <Image
+                  src="/images/avatar.jpg"
+                  alt={name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030014]/80 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="font-bold text-white text-xl tracking-tight">{name}</div>
+                  <div className="font-mono text-xs text-[#00FFB2]/70 mt-1">AI & ML Engineer · Bangalore</div>
+                </div>
+              </div>
+            </div>
+
+            {/* System Monitor */}
             <div className="os-window">
               <div className="os-titlebar">
                 <div className="os-titlebar-dots">
@@ -42,10 +74,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
                 <span className="font-mono text-[10px] text-white/30 ml-3">system_info.sh</span>
               </div>
 
-              <div className="p-6 space-y-6">
-                {/* System Info */}
+              <div className="p-6 space-y-5">
+                {/* User Info */}
                 <div className="space-y-3">
-                  <div className="font-mono text-[10px] text-[#00ff88]/60 uppercase tracking-widest">// User Profile</div>
+                  <div className="font-mono text-[10px] text-[#00FFB2]/60 uppercase tracking-widest">// User Profile</div>
                   <div className="space-y-2 font-mono text-sm">
                     <div className="flex justify-between">
                       <span className="text-white/40">user</span>
@@ -53,15 +85,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/40">role</span>
-                      <span className="text-[#00ff88]">AI/ML Engineer</span>
+                      <span className="text-[#00FFB2]">AI/ML Engineer</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/40">location</span>
-                      <span className="text-[#00d4ff]">{location}</span>
+                      <span className="text-[#00C9FF]">{location}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/40">status</span>
-                      <span className="text-[#00ff88] flex items-center gap-2">
+                      <span className="text-[#00FFB2] flex items-center gap-2">
                         <span className="status-dot !w-1.5 !h-1.5" /> online
                       </span>
                     </div>
@@ -72,8 +104,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
 
                 {/* Active Modules */}
                 <div className="space-y-3">
-                  <div className="font-mono text-[10px] text-[#00ff88]/60 uppercase tracking-widest">// Active Modules</div>
-                  <div className="space-y-2">
+                  <div className="font-mono text-[10px] text-[#00FFB2]/60 uppercase tracking-widest">// Active Modules</div>
+                  <div className="space-y-2.5">
                     {systemModules.map((mod) => (
                       <div key={mod.name} className="flex items-center justify-between font-mono text-xs">
                         <div className="flex items-center gap-2">
@@ -82,7 +114,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="text-white/20">{mod.cpu}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider" style={{ color: mod.color, background: `${mod.color}15`, border: `1px solid ${mod.color}30` }}>
+                          <span className="text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider" style={{ color: mod.color, background: `${mod.color}15`, border: `1px solid ${mod.color}25` }}>
                             {mod.status}
                           </span>
                         </div>
@@ -95,10 +127,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
 
                 {/* Quick Stats */}
                 <div className="grid grid-cols-2 gap-3">
-                  <StatMini icon={<Cpu className="w-3.5 h-3.5" />} label="Uptime" value="3+ yrs" color="#00ff88" />
-                  <StatMini icon={<HardDrive className="w-3.5 h-3.5" />} label="Projects" value="10+" color="#00d4ff" />
-                  <StatMini icon={<Wifi className="w-3.5 h-3.5" />} label="Network" value="Stable" color="#a855f7" />
-                  <StatMini icon={<Terminal className="w-3.5 h-3.5" />} label="Commits" value="500+" color="#ffaa00" />
+                  <StatMini icon={<Cpu className="w-3.5 h-3.5" />} label="Uptime" value="3+ yrs" color="#00FFB2" />
+                  <StatMini icon={<HardDrive className="w-3.5 h-3.5" />} label="Projects" value="10+" color="#00C9FF" />
+                  <StatMini icon={<Wifi className="w-3.5 h-3.5" />} label="Network" value="Stable" color="#8B5CF6" />
+                  <StatMini icon={<Terminal className="w-3.5 h-3.5" />} label="Commits" value="500+" color="#FBBF24" />
                 </div>
               </div>
             </div>
@@ -114,8 +146,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
           >
             {/* Section header */}
             <div className="mb-10">
-              <div className="font-mono text-xs text-[#00ff88]/50 mb-3 flex items-center gap-2">
-                <span className="text-[#00ff88]">❯</span> cat ~/about.md
+              <div className="font-mono text-xs text-[#00FFB2]/50 mb-3 flex items-center gap-2">
+                <span className="text-[#00FFB2]">❯</span> cat ~/about.md
               </div>
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white/90 tracking-tighter leading-[0.9] mb-4">
                 About <span className="section-header !text-5xl md:!text-6xl lg:!text-7xl">me.</span>
@@ -137,25 +169,25 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
                 icon={<MapPin className="w-5 h-5" />}
                 label="Location"
                 value={location}
-                color="#00d4ff"
+                color="#00C9FF"
               />
               <AboutCard
                 icon={<GraduationCap className="w-5 h-5" />}
                 label="Education"
                 value="B.E in AI & ML"
-                color="#a855f7"
+                color="#8B5CF6"
               />
               <AboutCard
                 icon={<HeartPulse className="w-5 h-5" />}
                 label="Focus"
                 value="Deep Learning & CNNs"
-                color="#ff3366"
+                color="#FF6B9D"
               />
               <AboutCard
                 icon={<Code2 className="w-5 h-5" />}
                 label="Toolkit"
                 value="Python, Next.js, AWS"
-                color="#00ff88"
+                color="#00FFB2"
               />
             </div>
           </motion.div>
@@ -166,7 +198,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
 };
 
 const StatMini = ({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: string; color: string }) => (
-  <div className="p-3 rounded-lg bg-white/3 border border-white/5 hover:border-white/10 transition-all">
+  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all">
     <div className="flex items-center gap-1.5 mb-1" style={{ color }}>
       {icon}
       <span className="font-mono text-[9px] uppercase tracking-widest opacity-60">{label}</span>
@@ -179,7 +211,7 @@ const AboutCard = ({ icon, label, value, color }: { icon: React.ReactNode; label
   <div className="os-window !rounded-xl p-5 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300">
     <div
       className="p-3 rounded-xl flex items-center justify-center shrink-0"
-      style={{ background: `${color}15`, color, border: `1px solid ${color}30` }}
+      style={{ background: `${color}12`, color, border: `1px solid ${color}25` }}
     >
       {icon}
     </div>

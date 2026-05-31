@@ -26,14 +26,15 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
   };
 
   return (
-    <section id="experience" className="py-28 relative overflow-hidden px-6" style={{ background: 'linear-gradient(180deg, #050510 0%, #060618 50%, #050510 100%)' }}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00d4ff]/3 blur-[200px] rounded-full pointer-events-none" />
+    <section id="experience" className="py-28 relative overflow-hidden px-6 aurora-section">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#00C9FF]/[0.03] blur-[120px] md:blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-[#8B5CF6]/[0.04] blur-[100px] md:blur-[180px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto max-w-5xl relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
-          <div className="font-mono text-xs text-[#00ff88]/50 mb-3 inline-flex items-center gap-2">
-            <span className="text-[#00ff88]">❯</span> git log --oneline --graph
+          <div className="font-mono text-xs text-[#00FFB2]/50 mb-3 inline-flex items-center gap-2">
+            <span className="text-[#00FFB2]">❯</span> git log --oneline --graph
           </div>
           <h2 className="section-header mb-4">Experience.</h2>
           <p className="text-lg text-white/40 font-medium max-w-xl mx-auto">
@@ -43,8 +44,11 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#00ff88]/20 to-transparent md:-translate-x-1/2" />
+          {/* Vertical line — aurora gradient */}
+          <div
+            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2"
+            style={{ background: 'linear-gradient(180deg, transparent, rgba(0,255,178,0.2), rgba(139,92,246,0.2), transparent)' }}
+          />
 
           <div className="space-y-12">
             {experience.map((exp, index) => (
@@ -60,17 +64,17 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
               >
                 {/* Timeline node */}
                 <div className="absolute left-8 md:left-1/2 w-4 h-4 -translate-x-1/2 top-8 z-10">
-                  <div className="w-4 h-4 rounded-full bg-[#0a0a1a] border-2 border-[#00ff88] shadow-[0_0_12px_rgba(0,255,136,0.4)]" />
+                  <div className="w-4 h-4 rounded-full bg-[#030014] border-2 border-[#00FFB2] shadow-[0_0_12px_rgba(0,255,178,0.4)]" />
                 </div>
 
                 {/* Git branch icon */}
-                <div className="absolute left-[22px] md:left-1/2 -translate-x-1/2 top-14 text-[#00ff88]/30">
+                <div className="absolute left-[22px] md:left-1/2 -translate-x-1/2 top-14 text-[#00FFB2]/30">
                   <GitBranch className="w-3 h-3" />
                 </div>
 
                 {/* Date card */}
                 <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'} pl-16 md:pl-0`}>
-                  <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#00ff88]/8 border border-[#00ff88]/15 font-mono text-xs text-[#00ff88] ${index % 2 === 0 ? '' : ''}`}>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#00FFB2]/[0.06] border border-[#00FFB2]/15 font-mono text-xs text-[#00FFB2]">
                     <Calendar className="w-3 h-3" />
                     {formatDate(exp.startDate)} → {formatDate(exp.endDate)}
                   </div>
@@ -99,15 +103,15 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
                       </h3>
 
                       <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <span className="flex items-center gap-1.5 font-mono text-xs text-[#00d4ff]">
+                        <span className="flex items-center gap-1.5 font-mono text-xs text-[#00C9FF]">
                           <Briefcase className="w-3 h-3" /> {exp.company}
                         </span>
-                        <span className="flex items-center gap-1.5 font-mono text-xs text-[#a855f7]">
+                        <span className="flex items-center gap-1.5 font-mono text-xs text-[#8B5CF6]">
                           <MapPin className="w-3 h-3" /> {exp.location}
                         </span>
                       </div>
 
-                      <p className="text-sm text-white/40 leading-relaxed mb-5 border-l-2 border-[#00ff88]/20 pl-4">
+                      <p className="text-sm text-white/40 leading-relaxed mb-5 border-l-2 border-[#00FFB2]/20 pl-4">
                         {exp.description}
                       </p>
 
@@ -115,7 +119,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
                         <div className="space-y-2 mb-5">
                           {exp.responsibilities.map((resp, i) => (
                             <div key={i} className="flex items-start gap-2 text-sm">
-                              <ChevronRight className="w-4 h-4 text-[#00ff88]/50 shrink-0 mt-0.5" />
+                              <ChevronRight className="w-4 h-4 text-[#00FFB2]/50 shrink-0 mt-0.5" />
                               <span className="text-white/50 leading-relaxed">{resp}</span>
                             </div>
                           ))}
@@ -125,7 +129,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
                       {exp.technologies && (
                         <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
                           {exp.technologies.map(tech => (
-                            <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded bg-white/5 text-white/30 border border-white/5">
+                            <span key={tech} className="text-[10px] font-mono px-2 py-1 rounded-lg bg-white/5 text-white/30 border border-white/5">
                               {tech}
                             </span>
                           ))}
