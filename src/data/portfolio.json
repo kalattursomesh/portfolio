@@ -23,6 +23,33 @@
   },
   "projects": [
     {
+      "id": "digital-twin-behavior",
+      "title": "Digital Twin - Behavior Prediction System",
+      "description": "A state-of-the-art AI-powered digital twin system predicting human actions and daily productivity habits.",
+      "longDescription": "A comprehensive simulation platform mapping user habits to custom mathematical models. Features a glassmorphism dashboard built with React and Tailwind, a Spring Boot backend API with WebSockets for real-time focus notifications, and a Python FastAPI service running sequence-prediction models to forecast user actions.",
+      "technologies": [
+        { "name": "React", "category": "frontend", "icon": "react", "color": "#61DAFB" },
+        { "name": "Spring Boot", "category": "backend", "icon": "spring", "color": "#6DB33F" },
+        { "name": "FastAPI", "category": "ai-ml", "icon": "fastapi", "color": "#009688" },
+        { "name": "PyTorch", "category": "ai-ml", "icon": "pytorch", "color": "#EE4C2C" },
+        { "name": "MongoDB", "category": "database", "icon": "mongodb", "color": "#47A248" },
+        { "name": "WebSockets", "category": "backend", "icon": "websocket", "color": "#010101" }
+      ],
+      "category": "ai-ml",
+      "images": [
+        { "src": "/images/projects/digital-twin.png", "alt": "Digital Twin Dashboard Mockup", "width": 1200, "height": 800 }
+      ],
+      "githubUrl": "https://github.com/kalattursomesh",
+      "featured": true,
+      "completedDate": "2024-06-01T00:00:00.000Z",
+      "highlights": [
+        "Time-series sequence forecasting of next user actions using LSTM networks",
+        "WebSocket-based active distraction monitoring and real-time alert triggers",
+        "Premium cyber-teal glassmorphic user dashboard featuring Recharts analytics",
+        "Distributed multi-service architecture (React 18, Spring Boot 3.x, FastAPI, MongoDB)"
+      ]
+    },
+    {
       "id": "aws-cloud-infra",
       "title": "AWS Cloud Infrastructure Project",
       "description": "Secure and scalable AWS infrastructure provisioning with EC2, S3, and IAM.",
