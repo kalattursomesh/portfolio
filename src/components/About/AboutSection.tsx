@@ -3,223 +3,165 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PersonalInfo } from '@/types';
-import { MapPin, GraduationCap, Code2, HeartPulse, Terminal, Wifi, HardDrive, Cpu } from 'lucide-react';
+import { MapPin, GraduationCap, Code2, HeartPulse, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 
 interface AboutSectionProps {
   personal: PersonalInfo;
 }
 
-const systemModules = [
-  { name: 'neural_networks.py', status: 'active', cpu: '34%', color: '#00FFB2' },
-  { name: 'cloud_infra.aws', status: 'active', cpu: '28%', color: '#00C9FF' },
-  { name: 'web_runtime.tsx', status: 'active', cpu: '22%', color: '#8B5CF6' },
-  { name: 'dsa_engine.cpp', status: 'idle', cpu: '8%', color: '#FBBF24' },
+const bentoCards = [
+  {
+    emoji: '📍',
+    icon: <MapPin className="w-5 h-5" />,
+    label: 'Based in',
+    value: 'Bangalore, India',
+    gradient: 'from-[#3B82F6]/20 to-[#818CF8]/10',
+    color: '#3B82F6',
+  },
+  {
+    emoji: '🎓',
+    icon: <GraduationCap className="w-5 h-5" />,
+    label: 'Education',
+    value: 'B.E in AI & ML',
+    gradient: 'from-[#A855F7]/20 to-[#FF2D78]/10',
+    color: '#A855F7',
+  },
+  {
+    emoji: '🧠',
+    icon: <HeartPulse className="w-5 h-5" />,
+    label: 'Focus',
+    value: 'Deep Learning & CNNs',
+    gradient: 'from-[#FF2D78]/20 to-[#FF6B35]/10',
+    color: '#FF2D78',
+  },
+  {
+    emoji: '🛠️',
+    icon: <Code2 className="w-5 h-5" />,
+    label: 'Toolkit',
+    value: 'Python, Next.js, AWS',
+    gradient: 'from-[#BEFF46]/15 to-[#38BDF8]/10',
+    color: '#BEFF46',
+  },
+];
+
+const quickStats = [
+  { value: '10+', label: 'Projects', emoji: '🚀' },
+  { value: '3+', label: 'Years Exp', emoji: '⏳' },
+  { value: '500+', label: 'Commits', emoji: '💻' },
+  { value: '∞', label: 'Curiosity', emoji: '✨' },
 ];
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ personal }) => {
-  const { name, bio, location } = personal;
+  const { name, bio } = personal;
 
   return (
-    <section id="about" className="py-28 relative overflow-hidden px-6 aurora-section">
-      {/* Aurora ambient */}
-      <div className="absolute top-1/4 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#8B5CF6]/[0.04] blur-[100px] md:blur-[180px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#00FFB2]/[0.03] blur-[80px] md:blur-[150px] rounded-full pointer-events-none" />
+    <section id="about" className="py-28 relative overflow-hidden px-6 section-dark">
+      {/* Background orbs */}
+      <div className="absolute top-1/4 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#A855F7]/[0.04] blur-[100px] md:blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#FF2D78]/[0.03] blur-[80px] md:blur-[150px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto relative z-10 max-w-6xl">
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
+          <div className="inline-flex items-center gap-2 pill-badge-purple mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            get to know me
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black text-white/90 tracking-tighter leading-[0.95] mb-4">
+            about <span className="genz-heading-sm !text-5xl md:!text-7xl">me.</span>
+          </h2>
+        </motion.div>
 
-          {/* Left Column: Photo + System Monitor */}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Large card: Photo + Bio */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-2 space-y-6"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="md:col-span-2 md:row-span-2 genz-card-glow"
           >
-            {/* Photo Card */}
-            <div className="os-window">
-              <div className="os-titlebar">
-                <div className="os-titlebar-dots">
-                  <div className="os-titlebar-dot bg-[#ff5f57]" />
-                  <div className="os-titlebar-dot bg-[#febc2e]" />
-                  <div className="os-titlebar-dot bg-[#28c840]" />
-                </div>
-                <span className="font-mono text-[10px] text-white/30 ml-3">identity.jpg</span>
-              </div>
-              <div className="relative aspect-[4/5] overflow-hidden rounded-b-2xl avatar-aurora-ring">
-                <Image
-                  src="/images/avatar.jpg"
-                  alt={name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  className="object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030014]/80 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="font-bold text-white text-xl tracking-tight">{name}</div>
-                  <div className="font-mono text-xs text-[#00FFB2]/70 mt-1">AI & ML Engineer · Bangalore</div>
+            <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row gap-8 h-full">
+              {/* Photo */}
+              <div className="flex-shrink-0">
+                <div className="relative w-full md:w-48 aspect-square rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/avatar.jpg"
+                    alt={name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 200px"
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F]/60 via-transparent to-transparent" />
                 </div>
               </div>
-            </div>
 
-            {/* System Monitor */}
-            <div className="os-window">
-              <div className="os-titlebar">
-                <div className="os-titlebar-dots">
-                  <div className="os-titlebar-dot bg-[#ff5f57]" />
-                  <div className="os-titlebar-dot bg-[#febc2e]" />
-                  <div className="os-titlebar-dot bg-[#28c840]" />
-                </div>
-                <span className="font-mono text-[10px] text-white/30 ml-3">system_info.sh</span>
-              </div>
-
-              <div className="p-6 space-y-5">
-                {/* User Info */}
-                <div className="space-y-3">
-                  <div className="font-mono text-[10px] text-[#00FFB2]/60 uppercase tracking-widest">// User Profile</div>
-                  <div className="space-y-2 font-mono text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-white/40">user</span>
-                      <span className="text-white font-bold">{name}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white/40">role</span>
-                      <span className="text-[#00FFB2]">AI/ML Engineer</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white/40">location</span>
-                      <span className="text-[#00C9FF]">{location}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white/40">status</span>
-                      <span className="text-[#00FFB2] flex items-center gap-2">
-                        <span className="status-dot !w-1.5 !h-1.5" /> online
-                      </span>
-                    </div>
-                  </div>
+              {/* Bio */}
+              <div className="flex-1 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold text-white tracking-tight mb-4">
+                  {name} <span className="text-[#FF2D78]">✦</span>
+                </h3>
+                <div className="space-y-4">
+                  {(bio || '').split('\n').map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className={`leading-relaxed font-medium ${index === 0 ? 'text-white/70 text-lg' : 'text-white/40'}`}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
                 </div>
 
-                <div className="h-px bg-white/5" />
-
-                {/* Active Modules */}
-                <div className="space-y-3">
-                  <div className="font-mono text-[10px] text-[#00FFB2]/60 uppercase tracking-widest">// Active Modules</div>
-                  <div className="space-y-2.5">
-                    {systemModules.map((mod) => (
-                      <div key={mod.name} className="flex items-center justify-between font-mono text-xs">
-                        <div className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full" style={{ background: mod.color, boxShadow: `0 0 6px ${mod.color}80` }} />
-                          <span className="text-white/60">{mod.name}</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-white/20">{mod.cpu}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider" style={{ color: mod.color, background: `${mod.color}15`, border: `1px solid ${mod.color}25` }}>
-                            {mod.status}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="h-px bg-white/5" />
-
-                {/* Quick Stats */}
-                <div className="grid grid-cols-2 gap-3">
-                  <StatMini icon={<Cpu className="w-3.5 h-3.5" />} label="Uptime" value="3+ yrs" color="#00FFB2" />
-                  <StatMini icon={<HardDrive className="w-3.5 h-3.5" />} label="Projects" value="10+" color="#00C9FF" />
-                  <StatMini icon={<Wifi className="w-3.5 h-3.5" />} label="Network" value="Stable" color="#8B5CF6" />
-                  <StatMini icon={<Terminal className="w-3.5 h-3.5" />} label="Commits" value="500+" color="#FBBF24" />
+                {/* Quick stats row */}
+                <div className="flex flex-wrap gap-3 mt-8">
+                  {quickStats.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/[0.04] border border-white/[0.06]"
+                    >
+                      <span className="text-sm">{stat.emoji}</span>
+                      <span className="font-bold text-white text-sm">{stat.value}</span>
+                      <span className="text-xs text-white/30">{stat.label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Bio */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-3"
-          >
-            {/* Section header */}
-            <div className="mb-10">
-              <div className="font-mono text-xs text-[#00FFB2]/50 mb-3 flex items-center gap-2">
-                <span className="text-[#00FFB2]">❯</span> cat ~/about.md
+          {/* Small bento cards */}
+          {bentoCards.map((card, i) => (
+            <motion.div
+              key={card.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+              className="genz-card group hover:!border-white/10"
+            >
+              <div className={`relative z-10 p-6 h-full bg-gradient-to-br ${card.gradient} rounded-3xl`}>
+                <div className="text-3xl mb-3">{card.emoji}</div>
+                <div className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-1">
+                  {card.label}
+                </div>
+                <div className="text-lg font-bold text-white tracking-tight">
+                  {card.value}
+                </div>
               </div>
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white/90 tracking-tighter leading-[0.9] mb-4">
-                About <span className="section-header !text-5xl md:!text-6xl lg:!text-7xl">me.</span>
-              </h2>
-            </div>
-
-            {/* Bio paragraphs */}
-            <div className="space-y-6 mb-12">
-              {(bio || '').split('\n').map((paragraph, index) => (
-                <p key={index} className={`text-lg leading-relaxed font-medium ${index === 0 ? 'text-white/80 text-xl' : 'text-white/40'}`}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            {/* Detail cards */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              <AboutCard
-                icon={<MapPin className="w-5 h-5" />}
-                label="Location"
-                value={location}
-                color="#00C9FF"
-              />
-              <AboutCard
-                icon={<GraduationCap className="w-5 h-5" />}
-                label="Education"
-                value="B.E in AI & ML"
-                color="#8B5CF6"
-              />
-              <AboutCard
-                icon={<HeartPulse className="w-5 h-5" />}
-                label="Focus"
-                value="Deep Learning & CNNs"
-                color="#FF6B9D"
-              />
-              <AboutCard
-                icon={<Code2 className="w-5 h-5" />}
-                label="Toolkit"
-                value="Python, Next.js, AWS"
-                color="#00FFB2"
-              />
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
-const StatMini = ({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: string; color: string }) => (
-  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all">
-    <div className="flex items-center gap-1.5 mb-1" style={{ color }}>
-      {icon}
-      <span className="font-mono text-[9px] uppercase tracking-widest opacity-60">{label}</span>
-    </div>
-    <div className="font-bold text-white text-sm">{value}</div>
-  </div>
-);
-
-const AboutCard = ({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: string; color: string }) => (
-  <div className="os-window !rounded-xl p-5 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300">
-    <div
-      className="p-3 rounded-xl flex items-center justify-center shrink-0"
-      style={{ background: `${color}12`, color, border: `1px solid ${color}25` }}
-    >
-      {icon}
-    </div>
-    <div>
-      <div className="text-xs font-mono text-white/30 tracking-wider uppercase">{label}</div>
-      <div className="text-base font-bold text-white tracking-tight leading-tight">{value}</div>
-    </div>
-  </div>
-);
 
 export default AboutSection;

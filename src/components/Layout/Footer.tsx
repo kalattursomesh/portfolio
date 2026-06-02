@@ -1,103 +1,58 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Github, Linkedin, Twitter, Mail, Terminal, Wifi, Cpu } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from 'lucide-react';
 
 export function Footer() {
-  const [time, setTime] = useState('');
-  const [uptime, setUptime] = useState('');
-
-  useEffect(() => {
-    const start = Date.now();
-    const tick = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        })
-      );
-      const elapsed = Math.floor((Date.now() - start) / 1000);
-      const mins = Math.floor(elapsed / 60);
-      const secs = elapsed % 60;
-      setUptime(`${mins}m ${secs}s`);
-    };
-    tick();
-    const interval = setInterval(tick, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <footer className="relative overflow-hidden z-50" style={{ background: 'linear-gradient(180deg, #030014 0%, #020008 100%)' }}>
-      {/* Aurora ambient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#8B5CF6]/[0.03] blur-[180px] rounded-full pointer-events-none" />
+    <footer className="relative overflow-hidden z-50" style={{ background: 'linear-gradient(180deg, #0A0A0F 0%, #08060E 100%)' }}>
+      {/* Background orb */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FF2D78]/[0.04] blur-[180px] rounded-full pointer-events-none" />
 
       {/* Main footer content */}
       <div className="border-t border-white/5">
-        <div className="container mx-auto max-w-6xl px-6 py-20">
-          <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-12 mb-16">
-            {/* CTA */}
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#00FFB2]/[0.06] border border-[#00FFB2]/15 mb-6">
-                <span className="status-dot" />
-                <span className="font-mono text-xs text-[#00FFB2]">currently accepting new projects</span>
-              </div>
-              <h2 className="text-5xl md:text-7xl font-black text-white/90 tracking-tighter leading-[0.9] mb-4">
-                Let&apos;s build <br />
-                <span className="shimmer-text !text-5xl md:!text-7xl">something.</span>
-              </h2>
-              <p className="text-lg text-white/30 font-medium max-w-md">
-                Have an idea? Let&apos;s architect it together.
-              </p>
+        <div className="container mx-auto max-w-6xl px-6 py-24">
+          <div className="flex flex-col items-center text-center gap-8 mb-16">
+            {/* Status badge */}
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/20">
+              <span className="status-dot-live" />
+              <span className="text-sm font-semibold text-[#22C55E]">open to new opportunities</span>
             </div>
 
-            {/* Actions */}
-            <div className="shrink-0 flex flex-col gap-3 w-full sm:w-auto">
-              <a href="mailto:kalathursomesh@gmail.com" className="btn-matrix group py-4 px-8 text-base justify-center">
-                <Mail className="mr-2 w-5 h-5" />
-                ./send_email.sh
-              </a>
-              <div className="flex gap-2">
-                <SocialIcon icon={<Github className="w-5 h-5" />} href="https://github.com/kalattursomesh" label="gh" />
-                <SocialIcon icon={<Linkedin className="w-5 h-5" />} href="https://linkedin.com/in/kalattursomesh" label="li" />
-                <SocialIcon icon={<Twitter className="w-5 h-5" />} href="https://twitter.com/kalattursomesh" label="tw" />
-              </div>
+            {/* Bold CTA */}
+            <h2 className="text-5xl md:text-8xl font-black text-white/90 tracking-tighter leading-[0.95]">
+              let&apos;s work<br />
+              <span className="genz-heading !text-5xl md:!text-8xl">together.</span> ✨
+            </h2>
+            <p className="text-lg text-white/30 font-medium max-w-md">
+              Have an idea? Let&apos;s turn it into something amazing.
+            </p>
+
+            {/* Email button */}
+            <a href="mailto:kalathursomesh@gmail.com" className="btn-gradient py-4 px-10 text-lg group">
+              <Mail className="mr-3 w-5 h-5" />
+              say hello
+              <ArrowUpRight className="ml-2 w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+
+            {/* Social icons */}
+            <div className="flex gap-3">
+              <SocialIcon icon={<Github className="w-5 h-5" />} href="https://github.com/kalattursomesh" />
+              <SocialIcon icon={<Linkedin className="w-5 h-5" />} href="https://linkedin.com/in/kalattursomesh" />
+              <SocialIcon icon={<Twitter className="w-5 h-5" />} href="https://twitter.com/kalattursomesh" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* OS Status Bar */}
-      <div className="border-t border-white/5 bg-[#020008]">
-        <div className="container mx-auto max-w-6xl px-6 py-3">
+      {/* Bottom bar */}
+      <div className="border-t border-white/5">
+        <div className="container mx-auto max-w-6xl px-6 py-4">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
-            {/* Left status */}
-            <div className="flex items-center gap-4 font-mono text-[10px] text-white/20">
-              <div className="flex items-center gap-1.5">
-                <Terminal className="w-3 h-3" />
-                <span>SOMESH_OS v2.0</span>
-              </div>
-              <div className="hidden sm:flex items-center gap-1.5">
-                <Wifi className="w-3 h-3 text-[#00FFB2]" />
-                <span>connected</span>
-              </div>
-              <div className="hidden md:flex items-center gap-1.5">
-                <Cpu className="w-3 h-3" />
-                <span>session: {uptime}</span>
-              </div>
+            <div className="text-sm font-semibold gradient-text-pink">
+              somesh.
             </div>
-
-            {/* Center */}
-            <div className="font-mono text-[10px] text-white/15">
-              © {new Date().getFullYear()} Kalattur Somesh — Engineered in Bangalore
-            </div>
-
-            {/* Right status */}
-            <div className="font-mono text-[10px] text-white/20 flex items-center gap-2">
-              <span className="status-dot !w-1 !h-1" />
-              {time}
+            <div className="text-xs text-white/20 font-medium">
+              © {new Date().getFullYear()} Kalattur Somesh — Built with 💖 in Bangalore
             </div>
           </div>
         </div>
@@ -106,13 +61,12 @@ export function Footer() {
   );
 }
 
-const SocialIcon = ({ icon, href, label }: { icon: React.ReactNode; href: string; label: string }) => (
+const SocialIcon = ({ icon, href }: { icon: React.ReactNode; href: string }) => (
   <a
     href={href}
     target="_blank"
-    className="flex-1 sm:flex-none flex items-center justify-center gap-2 p-4 rounded-xl os-window hover:!border-[#00FFB2]/30 transition-all group"
+    className="flex items-center justify-center w-12 h-12 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/40 hover:text-[#FF2D78] hover:border-[#FF2D78]/30 hover:bg-[#FF2D78]/[0.06] transition-all duration-300"
   >
-    <span className="text-white/40 group-hover:text-[#00FFB2] transition-colors">{icon}</span>
-    <span className="font-mono text-[10px] text-white/20 group-hover:text-[#00FFB2]/60 transition-colors hidden sm:inline">{label}</span>
+    {icon}
   </a>
 );

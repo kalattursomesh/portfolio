@@ -23,9 +23,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Kalattur Somesh — AI/ML Engineer & System Architect',
-  description: 'Portfolio OS of Kalattur Somesh. AI/ML specialist, full-stack developer, and AWS-certified cloud engineer. Explore my terminal.',
-  keywords: ['AI/ML Engineer', 'Portfolio', 'Full Stack Developer', 'AWS Certified', 'Deep Learning', 'Python'],
+  title: 'Somesh K — AI/ML Engineer & Full-Stack Developer',
+  description: 'Hey! I\'m Somesh — an AI/ML engineer building cool stuff with deep learning, full-stack dev, and cloud infrastructure. Check out my work.',
+  keywords: ['AI/ML Engineer', 'Portfolio', 'Full Stack Developer', 'AWS Certified', 'Deep Learning', 'Python', 'Gen Z Developer'],
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${outfit.variable} ${jetbrains.variable} scroll-smooth`}>
-      <body className="font-sans text-white bg-[#050510] scanlines">
+      <body className="font-sans text-white bg-[#0A0A0F]">
         <GlowEffect />
         <Navigation />
         {children}

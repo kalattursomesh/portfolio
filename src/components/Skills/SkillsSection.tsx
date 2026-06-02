@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Skill } from '@/types';
-import { Cpu, Cloud, Code2, Terminal, Layers, Globe, Zap } from 'lucide-react';
+import { Cpu, Cloud, Code2, Layers, Zap, Wrench } from 'lucide-react';
 
 interface SkillsSectionProps {
   skills: Skill[];
@@ -14,37 +14,44 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
 
   const getCategoryTheme = (category: string) => {
     switch (category.toLowerCase()) {
-      case 'cloud': return { color: '#00C9FF', icon: <Cloud className="w-5 h-5" />, cmd: 'aws' };
-      case 'ai/ml': return { color: '#8B5CF6', icon: <Cpu className="w-5 h-5" />, cmd: 'torch' };
-      case 'languages': return { color: '#00FFB2', icon: <Code2 className="w-5 h-5" />, cmd: 'lang' };
-      case 'frontend': return { color: '#FF6B9D', icon: <Layers className="w-5 h-5" />, cmd: 'web' };
-      case 'tools': return { color: '#FBBF24', icon: <Terminal className="w-5 h-5" />, cmd: 'tools' };
-      case 'cs fundamentals': return { color: '#00C9FF', icon: <Zap className="w-5 h-5" />, cmd: 'core' };
-      default: return { color: '#ffffff', icon: <Globe className="w-5 h-5" />, cmd: 'misc' };
+      case 'cloud': return { color: '#38BDF8', gradient: 'from-[#38BDF8]/20 to-[#3B82F6]/10', icon: <Cloud className="w-5 h-5" />, emoji: '☁️' };
+      case 'ai/ml': return { color: '#A855F7', gradient: 'from-[#A855F7]/20 to-[#FF2D78]/10', icon: <Cpu className="w-5 h-5" />, emoji: '🧠' };
+      case 'languages': return { color: '#BEFF46', gradient: 'from-[#BEFF46]/15 to-[#38BDF8]/10', icon: <Code2 className="w-5 h-5" />, emoji: '💻' };
+      case 'frontend': return { color: '#FF2D78', gradient: 'from-[#FF2D78]/20 to-[#FF6B35]/10', icon: <Layers className="w-5 h-5" />, emoji: '🎨' };
+      case 'tools': return { color: '#FF6B35', gradient: 'from-[#FF6B35]/20 to-[#BEFF46]/10', icon: <Wrench className="w-5 h-5" />, emoji: '🔧' };
+      case 'cs fundamentals': return { color: '#3B82F6', gradient: 'from-[#3B82F6]/20 to-[#818CF8]/10', icon: <Zap className="w-5 h-5" />, emoji: '⚡' };
+      default: return { color: '#94A3B8', gradient: 'from-white/10 to-white/5', icon: <Code2 className="w-5 h-5" />, emoji: '📦' };
     }
   };
 
   return (
-    <section id="skills" className="py-28 relative overflow-hidden px-6 aurora-section">
-      {/* Aurora ambient */}
-      <div className="absolute top-1/4 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#00FFB2]/[0.03] blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#8B5CF6]/[0.04] blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-[#00C9FF]/[0.02] blur-[100px] md:blur-[180px] rounded-full pointer-events-none" />
+    <section id="skills" className="py-28 relative overflow-hidden px-6 section-dark">
+      {/* Background orbs */}
+      <div className="absolute top-1/4 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#3B82F6]/[0.04] blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#A855F7]/[0.04] blur-[80px] md:blur-[200px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section heading */}
-        <div className="mb-16">
-          <div className="font-mono text-xs text-[#00FFB2]/50 mb-3 flex items-center gap-2">
-            <span className="text-[#00FFB2]">❯</span> ls -la ~/skills/
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="inline-flex items-center gap-2 pill-badge-blue mb-4">
+            <Wrench className="w-3.5 h-3.5" />
+            what i work with
           </div>
-          <h2 className="section-header mb-4">Technical Stack.</h2>
+          <h2 className="text-5xl md:text-7xl font-black text-white/90 tracking-tighter leading-[0.95] mb-4">
+            my toolkit<span className="genz-heading-sm !text-5xl md:!text-7xl">.</span> 🛠️
+          </h2>
           <p className="text-lg text-white/40 font-medium max-w-2xl">
-            The technologies and tools I use to architect intelligent systems, deploy cloud infrastructure, and build modern applications.
+            The technologies and tools I use to build intelligent systems and modern applications.
           </p>
-        </div>
+        </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {categories.map((category, catIdx) => {
             const theme = getCategoryTheme(category);
             const categorySkills = skills.filter(s => s.category === category);
@@ -55,74 +62,41 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: catIdx * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="os-window group"
+                transition={{ delay: catIdx * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="genz-card group"
               >
-                {/* Window title bar */}
-                <div className="os-titlebar">
-                  <div className="os-titlebar-dots">
-                    <div className="os-titlebar-dot bg-[#ff5f57]" />
-                    <div className="os-titlebar-dot bg-[#febc2e]" />
-                    <div className="os-titlebar-dot bg-[#28c840]" />
-                  </div>
-                  <span className="font-mono text-[10px] text-white/30 ml-3">
-                    {theme.cmd}.config
-                  </span>
-                </div>
-
-                <div className="p-6">
+                <div className={`relative z-10 p-6 h-full bg-gradient-to-br ${theme.gradient} rounded-3xl`}>
                   {/* Category header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div
-                      className="p-2.5 rounded-xl"
-                      style={{ background: `${theme.color}12`, color: theme.color, border: `1px solid ${theme.color}25` }}
-                    >
-                      {theme.icon}
-                    </div>
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="text-2xl">{theme.emoji}</div>
                     <div>
                       <h3 className="text-lg font-bold text-white tracking-tight">{category}</h3>
-                      <span className="font-mono text-[10px] text-white/20">{categorySkills.length} modules</span>
+                      <span className="text-xs text-white/25 font-medium">{categorySkills.length} skills</span>
                     </div>
                   </div>
 
-                  {/* Skill items */}
-                  <div className="space-y-4">
-                    {categorySkills.map((skill, skillIdx) => (
-                      <div key={skill.name} className="group/skill">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm font-medium text-white/70 group-hover/skill:text-white transition-colors tracking-tight">
-                            {skill.name}
-                          </span>
-                          <span
-                            className="font-mono text-xs font-bold transition-all"
-                            style={{ color: theme.color }}
+                  {/* Skill pills */}
+                  <div className="flex flex-wrap gap-2">
+                    {categorySkills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="group/skill relative px-3.5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-default"
+                        style={{
+                          background: `${theme.color}10`,
+                          border: `1px solid ${theme.color}20`,
+                          color: `${theme.color}CC`,
+                        }}
+                      >
+                        <span className="relative z-10">{skill.name}</span>
+
+                        {/* Proficiency tooltip on hover */}
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/skill:opacity-100 transition-opacity pointer-events-none">
+                          <div
+                            className="px-2 py-1 rounded-lg text-xs font-bold whitespace-nowrap"
+                            style={{ background: theme.color, color: '#0A0A0F' }}
                           >
                             {skill.proficiency}%
-                          </span>
-                        </div>
-
-                        {/* Progress bar with shimmer */}
-                        <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ background: `${theme.color}10` }}>
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.proficiency}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.2, delay: skillIdx * 0.1, ease: 'easeOut' }}
-                            className="h-full rounded-full relative skill-bar-shimmer"
-                            style={{
-                              background: `linear-gradient(90deg, ${theme.color}80, ${theme.color})`,
-                              boxShadow: `0 0 12px ${theme.color}40`,
-                            }}
-                          >
-                            {/* Glow tip */}
-                            <div
-                              className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
-                              style={{
-                                background: theme.color,
-                                boxShadow: `0 0 10px ${theme.color}`,
-                              }}
-                            />
-                          </motion.div>
+                          </div>
                         </div>
                       </div>
                     ))}

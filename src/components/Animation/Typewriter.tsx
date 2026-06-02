@@ -56,7 +56,8 @@ export default function Typewriter({
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
-        className="inline-block w-1.5 h-[1.2em] bg-[#00ff88] ml-1 align-middle"
+        className="inline-block w-[3px] h-[1.1em] ml-1 align-middle rounded-full"
+        style={{ background: 'linear-gradient(180deg, #FF2D78, #A855F7)' }}
       />
     </span>
   );

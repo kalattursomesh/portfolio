@@ -51,7 +51,7 @@ export default function Home() {
 	const skills = portfolio.skills || [];
 
 	return (
-		<main className="min-h-screen relative" style={{ background: '#050510' }}>
+		<main className="min-h-screen relative" style={{ background: '#0A0A0F' }}>
 			<HeroSection profile={profile} />
 			<AboutSection personal={personal} />
 			<SkillsSection skills={skills} />
